@@ -5,6 +5,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+//app.MapGet("/", () => "Hello World!");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=WelcomePage}");
 
 app.Run();
