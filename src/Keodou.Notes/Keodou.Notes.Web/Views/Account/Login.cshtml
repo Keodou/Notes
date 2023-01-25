@@ -1,0 +1,22 @@
+﻿@model LoginViewModel
+
+<h1>Логин форма</h1>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <div>
+        <label>Логин</label>
+        <input asp-for="Login" />
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label>Пароль</label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <button type="submit">Войти</button>
+    </div>
+</form>
+
+<!--<a class="btn btn-primary" asp-area="User" asp-controller="Home" asp-action="Notes">Войти</a>-->
