@@ -1,10 +1,11 @@
-using Keodou.Notes.Web.Models;
+using Keodou.Notes.Web.Models.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Service container
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<UserRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => options.LoginPath = "/Account/Login");
 builder.Services.AddAuthorization();
