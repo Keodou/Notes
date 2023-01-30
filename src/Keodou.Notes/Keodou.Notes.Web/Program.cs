@@ -1,9 +1,15 @@
+using Keodou.Notes.Web.Data;
+using Keodou.Notes.Web.Models;
 using Keodou.Notes.Web.Models.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Service container
+builder.Services.AddDbContext<NotesDbContext>(d => d.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UserRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -11,8 +17,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
-//app.MapGet("/", () => "Hello World!");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -31,3 +35,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=WelcomePage}/{id?}");
 
 app.Run();
+SeedData.EnsurePopulated(app);

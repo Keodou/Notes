@@ -1,7 +1,6 @@
 ﻿using Keodou.Notes.Web.Models.Repositories;
 using Keodou.Notes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -26,7 +25,9 @@ namespace Keodou.Notes.Web.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
 
             var user = _userRepository.GetUsers().FirstOrDefault(p => p.Login == model.Login && p.Password == model.Password);
             if (user is null)

@@ -1,14 +1,17 @@
-﻿namespace Keodou.Notes.Web.Models.Repositories
+﻿using Keodou.Notes.Web.Data;
+using Keodou.Notes.Web.Models.Entities;
+
+namespace Keodou.Notes.Web.Models.Repositories
 {
     public class UserRepository
     {
-        public List<User> GetUsers()
+        private readonly NotesDbContext _context;
+
+        public UserRepository(NotesDbContext context)
         {
-            return new List<User>()
-            {
-                new User() { Id = 1, Login = "sa", Password = "sa"},
-                new User() { Id = 2, Login = "sa2", Password = "sa2"}
-            };
+            _context = context;
         }
+
+        public IQueryable<User> GetUsers() => _context.Users;
     }
 }

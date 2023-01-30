@@ -1,21 +1,23 @@
 ﻿@model LoginViewModel
+@{
+    Layout = "_AccountLayout";
+}
 
-<h1>Логин форма</h1>
-
-<form asp-controller="Account" asp-action="Login" method="post">
+<form class="form-control" asp-controller="Account" asp-action="Login" method="post">
+    <h1 class="text-center">Логин форма</h1>
     <input type="hidden" asp-for="ReturnUrl" />
     <div>
-        <label>Логин</label>
-        <input asp-for="Login" />
-        <span asp-validation-for="Login"></span>
+        <label class="form-label">Логин</label>
+        <p><input class="form-control" asp-for="Login" /></p>
+        <span class="text-danger" asp-validation-for="Login"></span>
     </div>
     <div>
-        <label>Пароль</label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
+        <label class="form-label">Пароль</label>
+        <p><input class="form-control" asp-for="Password" /></p>
+        <span class="text-danger" asp-validation-for="Password"></span>
     </div>
-    <div>
-        <button type="submit">Войти</button>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Войти</button>
     </div>
 </form>
 
