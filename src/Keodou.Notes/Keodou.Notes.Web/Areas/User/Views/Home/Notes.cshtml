@@ -1,1 +1,22 @@
-﻿<h1>Заметки пользователя</h1>
+﻿@model IEnumerable<Note>
+
+<h1 class="text-center">Заметки пользователя</h1>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Группа</th>
+            <th>Посещаемость</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entity in Model)
+        {
+            <tr>
+                <td>@entity.Head</td>
+                <td>@entity.Text</td>
+                <td>@entity.User.Login</td>
+            </tr>
+        }
+    </tbody>
+</table>

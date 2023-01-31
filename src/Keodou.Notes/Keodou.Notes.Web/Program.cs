@@ -26,6 +26,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+//SeedData.EnsurePopulated();
 app.MapControllerRoute(
     name: "User",
     pattern: "{area:exists}/{controller=Home}/{action=Notes}/{id?}");
@@ -35,4 +36,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=WelcomePage}/{id?}");
 
 app.Run();
-SeedData.EnsurePopulated(app);

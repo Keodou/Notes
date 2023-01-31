@@ -15,5 +15,7 @@ namespace Keodou.Notes.Web.Models.Entities
         [Required(ErrorMessage = "Поле не может быть пустым, введите пароль")]
         [Column(TypeName = "nvarchar(50)")]
         public string Password { get; set; }
+
+        public IEnumerable<Note> Notes { get; set; }
     }
 }
