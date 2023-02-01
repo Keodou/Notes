@@ -12,6 +12,7 @@ builder.Services.AddDbContext<NotesDbContext>(d => d.UseSqlServer(
     ));
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UserRepository>();
+builder.Services.AddTransient<NoteRepository>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => options.LoginPath = "/Account/Login");
 builder.Services.AddAuthorization();

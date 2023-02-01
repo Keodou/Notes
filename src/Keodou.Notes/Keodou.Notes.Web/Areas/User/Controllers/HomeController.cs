@@ -1,7 +1,6 @@
 ﻿using Keodou.Notes.Web.Models.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Keodou.Notes.Web.Areas.User.Controllers
 {
@@ -10,15 +9,17 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
     public class HomeController : Controller
     {
         private readonly UserRepository _userRepository;
+        private readonly NoteRepository _noteRepository;
 
-        public HomeController(UserRepository userRepository)
+        public HomeController(UserRepository userRepository, NoteRepository noteRepository)
         {
             _userRepository = userRepository;
+            _noteRepository = noteRepository;
         }
 
         public IActionResult Notes()
         {
-            var model = _userRepository.GetUsers().Include(u => u.Users);
+            var model = _noteRepository.GetNotes().ToList();
             return View(model);
         }
     }
