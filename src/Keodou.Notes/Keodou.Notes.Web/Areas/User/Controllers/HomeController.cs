@@ -1,4 +1,5 @@
-﻿using Keodou.Notes.Web.Models.Repositories;
+﻿using Keodou.Notes.Web.Models;
+using Keodou.Notes.Web.Models.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
 
         public IActionResult Notes()
         {
-            var model = _noteRepository.GetNotes().ToList();
+            var model = _noteRepository.GetNotes(AuthUser.Id).ToList();
             return View(model);
         }
     }

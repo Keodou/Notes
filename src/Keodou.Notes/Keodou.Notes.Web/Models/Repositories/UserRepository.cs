@@ -15,7 +15,7 @@ namespace Keodou.Notes.Web.Models.Repositories
 
         public IQueryable<User> GetUsers()
         {
-            return _context.Users.Include(u => u.Notes);
+            return _context.Users;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Keodou.Notes.Web.Models.Repositories;
+﻿using Keodou.Notes.Web.Models;
+using Keodou.Notes.Web.Models.Repositories;
 using Keodou.Notes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +34,14 @@ namespace Keodou.Notes.Web.Controllers
             if (user is null)
                 return View(model);
 
+            // Add auth. cookie
             var claims = new List<Claim>()
             {
                 new Claim(model.Login, model.Password)
             };
+            //var authUser = new AuthUser(user.Id, user.Login, user.Password);
+            AuthUser.Id = user.Id;
+            AuthUser.Login = user.Login;
             var claimIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimPrincipal = new ClaimsPrincipal(claimIdentity);
             await HttpContext.SignInAsync("Cookies", claimPrincipal);
