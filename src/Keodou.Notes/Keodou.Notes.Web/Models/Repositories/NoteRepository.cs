@@ -12,6 +12,7 @@ namespace Keodou.Notes.Web.Models.Repositories
             _context = context;
         }
 
-        public IQueryable<Note> GetNotes(Guid id) => _context.Notes.Where(n => n.UserId == id);
+        public IQueryable<Note> GetNotes() => _context.Notes;
+        public IQueryable<Note> GetNotesById(Guid id) => _context.Notes.Where(n => n.UserId == id);
     }
 }
