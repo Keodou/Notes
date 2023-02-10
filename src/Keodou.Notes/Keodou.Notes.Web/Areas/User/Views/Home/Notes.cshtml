@@ -1,22 +1,23 @@
 ﻿@model List<Note>
 
-<a asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
+<div class="text-end">
+    <a class="text-center" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
+</div>
 <h1 class="text-center">Заметки пользователя</h1>
-<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Имя</th>
-            <th>Группа</th>
-            <th>Посещаемость</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var entity in Model)
+<div class="text-start p-2">
+    <a class="btn btn-primary">+</a>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        @foreach (var note in Model)
         {
-            <tr>
-                <td>@entity.Head</td>
-                <td>@entity.Text</td>
-            </tr>
+            <div class="card mb-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@note.Head</h5>
+                    <p class="card-text">@note.Text</p>
+                    <a href="#" class="btn btn-primary">Просмотреть</a>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>

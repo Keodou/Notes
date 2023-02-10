@@ -1,6 +1,7 @@
 ﻿using Keodou.Notes.Web.Models.Repositories;
 using Keodou.Notes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -46,10 +47,11 @@ namespace Keodou.Notes.Web.Controllers
             return Redirect(model.ReturnUrl);
         }
 
+        [Authorize]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync("Cookies");
-            return Redirect("/Home/WelcomePage");
+            return RedirectToAction("WelcomePage", "Home");
         }
     }
 }
