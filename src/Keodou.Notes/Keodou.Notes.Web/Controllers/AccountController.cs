@@ -1,10 +1,7 @@
-﻿using Keodou.Notes.Web.Models;
-using Keodou.Notes.Web.Models.Entities;
-using Keodou.Notes.Web.Models.Repositories;
+﻿using Keodou.Notes.Web.Models.Repositories;
 using Keodou.Notes.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using System.Security.Claims;
 
 namespace Keodou.Notes.Web.Controllers
@@ -47,6 +44,12 @@ namespace Keodou.Notes.Web.Controllers
             Response.Cookies.Append("UserId", $"{user.Id}");
 
             return Redirect(model.ReturnUrl);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync("Cookies");
+            return Redirect("/Home/WelcomePage");
         }
     }
 }

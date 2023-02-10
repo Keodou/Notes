@@ -1,5 +1,4 @@
 using Keodou.Notes.Web.Data;
-using Keodou.Notes.Web.Models;
 using Keodou.Notes.Web.Models.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
