@@ -22,5 +22,10 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
             var model = _noteRepository.GetNotesById(id).ToList();
             return View(model);
         }
+
+        public async Task<IActionResult> CreateNote()
+        {
+
+        }
     }
 }

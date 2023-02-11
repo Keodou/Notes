@@ -14,6 +14,9 @@ namespace Keodou.Notes.Web.Models.Entities
         [Required]
         public string Text { get; set; }
 
+        [Required]
+        public string Date { get; set; }
+
         public Guid UserId { get; set; }
 
         public User User { get; set; }
