@@ -14,7 +14,9 @@
             <div class="card-body">
                 <h5 class="card-title">@note.Head</h5>
                 <p class="card-text">@note.Text</p>
-                <a href="#" class="btn btn-primary">Просмотреть</a>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-action="EditNote" asp-route-id="@note.Id">Редактировать</a>
             </div>
         </div>
     }

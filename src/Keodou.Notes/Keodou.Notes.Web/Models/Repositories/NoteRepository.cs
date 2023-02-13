@@ -20,9 +20,9 @@ namespace Keodou.Notes.Web.Models.Repositories
             return await Task.Run(() => _context.Notes.Where(n => n.UserId == id).ToListAsync());
         }
 
-        public Note GetNotesById(Guid id)
+        public async Task<Note> GetNoteById(Guid id)
         {
-            return _context.Notes.Single(n => n.Id == id);
+            return await Task.Run(() => _context.Notes.SingleAsync(n => n.Id == id));
         }
 
         public async Task Save(Note note)
@@ -33,7 +33,7 @@ namespace Keodou.Notes.Web.Models.Repositories
             }
             else
             {
-                _context.Notes.Update(note);
+                _context.Update(note);
             }
             await _context.SaveChangesAsync();
         }

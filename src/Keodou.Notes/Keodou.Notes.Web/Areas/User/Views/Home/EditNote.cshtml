@@ -1,12 +1,7 @@
 ﻿@model Note
-@{
-    Layout = "_AccountLayout";
-}
 
-<form class="form-control" asp-area="User" asp-controller="Home" asp-action="EditNotes" method="post">
+<form class="form-control" asp-area="User" asp-controller="Home" asp-action="EditNote" method="post">
     <h1 class="text-center">Обновить данные</h1>
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="Date" />
     <input type="hidden" asp-for="UserId" />
     <div>
         <label class="form-label">Название</label>

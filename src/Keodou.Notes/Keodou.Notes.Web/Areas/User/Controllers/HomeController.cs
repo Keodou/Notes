@@ -46,13 +46,30 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
                 ModelState.AddModelError("", "Изменения не были сохранены, попробуйте еще раз");
             }
             return View(note);
+        }
 
-            //if (ModelState.IsValid)
-            //{
-            //    await _noteRepository.Save(note);
-            //    return RedirectToAction(nameof(Notes));
-            //}
-            //return View(note);
+        public async Task<IActionResult> EditNote(Guid id)
+        {
+            var note = await _noteRepository.GetNoteById(id);
+            if (note is not null)
+                return View(note);
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditNote(Note note)
+        {
+            try
+            {
+                await _noteRepository.Save(note);
+                return RedirectToAction(nameof(Notes));
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Изменения не были сохранены, попробуйте еще раз");
+            }
+            return View(note);
         }
 
         private Guid GetUserIdCookie()
