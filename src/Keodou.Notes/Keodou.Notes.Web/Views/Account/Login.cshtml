@@ -8,12 +8,12 @@
     <input type="hidden" asp-for="ReturnUrl" />
     <div>
         <label class="form-label">Логин</label>
-        <p><input class="form-control" asp-for="Login" /></p>
+        <p><input class="form-control" type="text" asp-for="Login" /></p>
         <span class="text-danger" asp-validation-for="Login"></span>
     </div>
     <div>
         <label class="form-label">Пароль</label>
-        <p><input class="form-control" asp-for="Password" /></p>
+        <p><input class="form-control" type="password" asp-for="Password" /></p>
         <span class="text-danger" asp-validation-for="Password"></span>
     </div>
     <div class="text-center">

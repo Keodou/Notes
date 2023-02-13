@@ -1,0 +1,24 @@
+﻿@model Note
+@{
+    Layout = "_AccountLayout";
+}
+
+<form class="form-control" asp-area="User" asp-controller="Home" asp-action="EditNotes" method="post">
+    <h1 class="text-center">Обновить данные</h1>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Date" />
+    <input type="hidden" asp-for="UserId" />
+    <div>
+        <label class="form-label">Название</label>
+        <p><input class="form-control" asp-for="Head" /></p>
+        <span class="text-danger" asp-validation-for="Head"></span>
+    </div>
+    <div>
+        <label class="form-label">Содержание</label>
+        <p><input class="form-control" asp-for="Text" /></p>
+        <span class="text-danger" asp-validation-for="Text"></span>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+    </div>
+</form>

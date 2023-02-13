@@ -1,5 +1,6 @@
 ﻿using Keodou.Notes.Web.Data;
 using Keodou.Notes.Web.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Keodou.Notes.Web.Models.Repositories
 {
@@ -14,13 +15,21 @@ namespace Keodou.Notes.Web.Models.Repositories
 
         public IQueryable<Note> GetNotes() => _context.Notes;
 
-        public IQueryable<Note> GetNotesById(Guid id) => _context.Notes.Where(n => n.UserId == id);
+        public async Task<List<Note>> GetNotesByUserId(Guid id)
+        {
+            return await Task.Run(() => _context.Notes.Where(n => n.UserId == id).ToListAsync());
+        }
+
+        public Note GetNotesById(Guid id)
+        {
+            return _context.Notes.Single(n => n.Id == id);
+        }
 
         public async Task Save(Note note)
         {
-            if (note == default)
+            if (note.Id == default)
             {
-                _context.Notes.Add(note);
+                _context.Add(note);
             }
             else
             {

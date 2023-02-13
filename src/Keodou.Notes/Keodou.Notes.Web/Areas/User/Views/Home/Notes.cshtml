@@ -5,19 +5,17 @@
 </div>
 <h1 class="text-center">Заметки пользователя</h1>
 <div class="text-start p-2">
-    <a class="btn btn-primary">+</a>
+    <a class="btn btn-primary" asp-action="Create">+</a>
 </div>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        @foreach (var note in Model)
-        {
-            <div class="card mb-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">@note.Head</h5>
-                    <p class="card-text">@note.Text</p>
-                    <a href="#" class="btn btn-primary">Просмотреть</a>
-                </div>
+    @foreach (var note in Model)
+    {
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@note.Head</h5>
+                <p class="card-text">@note.Text</p>
+                <a href="#" class="btn btn-primary">Просмотреть</a>
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
