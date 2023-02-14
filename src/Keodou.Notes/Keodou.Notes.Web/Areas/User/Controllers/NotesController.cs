@@ -8,16 +8,16 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
 {
     [Authorize]
     [Area("User")]
-    public class HomeController : Controller
+    public class NotesController : Controller
     {
         private readonly NoteRepository _noteRepository;
 
-        public HomeController(NoteRepository noteRepository)
+        public NotesController(NoteRepository noteRepository)
         {
             _noteRepository = noteRepository;
         }
 
-        public async Task<IActionResult> Notes()
+        public async Task<IActionResult> NotesList()
         {
             var model = await _noteRepository.GetNotesByUserId(GetUserIdCookie());
             return View(model);
@@ -38,7 +38,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
                 {
                     note.UserId = GetUserIdCookie();
                     await _noteRepository.Save(note);
-                    return RedirectToAction(nameof(Notes));
+                    return RedirectToAction(nameof(NotesList));
                 }
             }
             catch (DbUpdateException)
@@ -63,7 +63,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
             try
             {
                 await _noteRepository.Save(note);
-                return RedirectToAction(nameof(Notes));
+                return RedirectToAction(nameof(NotesList));
             }
             catch (DbUpdateException)
             {
@@ -80,7 +80,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
                 if (note is not null)
                 {
                     await _noteRepository.Delete(note);
-                    return RedirectToAction(nameof(Notes));
+                    return RedirectToAction(nameof(NotesList));
                 }
             }
             catch (DbUpdateException)

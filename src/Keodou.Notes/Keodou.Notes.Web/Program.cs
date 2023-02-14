@@ -29,7 +29,7 @@ app.UseAuthorization();
 //SeedData.EnsurePopulated();
 app.MapControllerRoute(
     name: "User",
-    pattern: "{area:exists}/{controller=Home}/{action=Notes}/{id?}");
+    pattern: "{area:exists}/{controller=Notes}/{action=NotesList}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
