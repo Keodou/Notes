@@ -72,6 +72,24 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
             return View(note);
         }
 
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var note = await _noteRepository.GetNoteById(id);
+            try
+            {
+                if (note is not null)
+                {
+                    await _noteRepository.Delete(note);
+                    return RedirectToAction(nameof(Notes));
+                }
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Изменения не были сохранены, попробуйте еще раз");
+            }
+            return NotFound();
+        }
+
         private Guid GetUserIdCookie()
         {
             var idString = Request.Cookies["UserId"];

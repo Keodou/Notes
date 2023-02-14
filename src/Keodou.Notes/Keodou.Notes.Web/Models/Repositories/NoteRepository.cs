@@ -37,5 +37,11 @@ namespace Keodou.Notes.Web.Models.Repositories
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task Delete(Note note)
+        {
+            _context.Remove(note);
+            await _context.SaveChangesAsync();
+        }
     }
 }
