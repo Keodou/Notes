@@ -30,7 +30,7 @@ namespace Keodou.Notes.Web.Controllers
                 return View(model);
             }
 
-            var user = _userRepository.GetUsers().FirstOrDefault(p => p.Login == model.Login && p.Password == model.Password);
+            var user = await _userRepository.GetUserAsync(model.Login, model.Password);
             if (user is null)
                 return View(model);
 

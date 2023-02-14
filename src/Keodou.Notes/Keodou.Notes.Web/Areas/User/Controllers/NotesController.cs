@@ -19,8 +19,16 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
 
         public async Task<IActionResult> NotesList()
         {
-            var model = await _noteRepository.GetNotesByUserId(GetUserIdCookie());
+            var model = await _noteRepository.GetNotesByUserIdAsync(GetUserIdCookie());
             return View(model);
+        }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var note = await _noteRepository.GetNoteByIdAsync(id);
+            if (note is null)
+                return NotFound();
+            return View(note);
         }
 
         public IActionResult Create()
@@ -37,7 +45,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
                 if (ModelState.IsValid)
                 {
                     note.UserId = GetUserIdCookie();
-                    await _noteRepository.Save(note);
+                    await _noteRepository.SaveAsync(note);
                     return RedirectToAction(nameof(NotesList));
                 }
             }
@@ -50,7 +58,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
 
         public async Task<IActionResult> EditNote(Guid id)
         {
-            var note = await _noteRepository.GetNoteById(id);
+            var note = await _noteRepository.GetNoteByIdAsync(id);
             if (note is not null)
                 return View(note);
             return NotFound();
@@ -62,7 +70,7 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
         {
             try
             {
-                await _noteRepository.Save(note);
+                await _noteRepository.SaveAsync(note);
                 return RedirectToAction(nameof(NotesList));
             }
             catch (DbUpdateException)
@@ -74,12 +82,12 @@ namespace Keodou.Notes.Web.Areas.User.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            var note = await _noteRepository.GetNoteById(id);
+            var note = await _noteRepository.GetNoteByIdAsync(id);
             try
             {
                 if (note is not null)
                 {
-                    await _noteRepository.Delete(note);
+                    await _noteRepository.DeleteAsync(note);
                     return RedirectToAction(nameof(NotesList));
                 }
             }

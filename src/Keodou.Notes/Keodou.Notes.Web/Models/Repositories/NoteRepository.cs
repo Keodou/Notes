@@ -15,17 +15,17 @@ namespace Keodou.Notes.Web.Models.Repositories
 
         public IQueryable<Note> GetNotes() => _context.Notes;
 
-        public async Task<List<Note>> GetNotesByUserId(Guid id)
+        public async Task<List<Note>> GetNotesByUserIdAsync(Guid id)
         {
             return await Task.Run(() => _context.Notes.Where(n => n.UserId == id).ToListAsync());
         }
 
-        public async Task<Note> GetNoteById(Guid id)
+        public async Task<Note> GetNoteByIdAsync(Guid id)
         {
             return await Task.Run(() => _context.Notes.SingleAsync(n => n.Id == id));
         }
 
-        public async Task Save(Note note)
+        public async Task SaveAsync(Note note)
         {
             if (note.Id == default)
             {
@@ -38,7 +38,7 @@ namespace Keodou.Notes.Web.Models.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Note note)
+        public async Task DeleteAsync(Note note)
         {
             _context.Remove(note);
             await _context.SaveChangesAsync();

@@ -13,9 +13,14 @@ namespace Keodou.Notes.Web.Models.Repositories
             _context = context;
         }
 
-        public IQueryable<User> GetUsers()
+        public async Task<IQueryable<User>> GetUsersAsync()
         {
-            return _context.Users;
+            return await Task.Run(() => _context.Users);
+        }
+
+        public async Task<User> GetUserAsync(string login, string password)
+        {
+            return await _context.Users.FirstOrDefaultAsync(p => p.Login == login && p.Password == password);
         }
     }
 }
